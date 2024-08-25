@@ -1,16 +1,18 @@
 package med.voll.api.model.paciente;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import med.voll.api.model.endereco.DadosEndereco;
 
-public record DadosPaciente(
+public record DadosCadastradoPaciente(
         @NotBlank
         String nome,
         @NotBlank
+        @Email
         String email,
-
         String telefone,
-        @NotBlank
-        DadosEndereco endereco
-) {
+        @NotNull @Valid
+        DadosEndereco endereco) {
+
+
 }
