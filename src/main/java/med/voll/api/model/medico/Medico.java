@@ -18,6 +18,7 @@ import med.voll.api.model.endereco.Endereco;
 public class Medico {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    private boolean ativo;
     private String nome;
     private String email;
     private String crm;
@@ -31,6 +32,7 @@ public class Medico {
 
     public Medico(DadosCadastradoMedico dados)
     {
+        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.crm = dados.crm();
@@ -52,5 +54,9 @@ public class Medico {
         {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

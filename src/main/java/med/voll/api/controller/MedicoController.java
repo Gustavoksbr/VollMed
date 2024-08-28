@@ -32,7 +32,7 @@ public class MedicoController {
     @GetMapping
     public Page<DadosListagemMedico> listar(@PageableDefault(size = 10,page=0,sort={"nome"}) Pageable paginacao)
     {
-        return repository.findAll(paginacao).map(DadosListagemMedico::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
     //    @GetMapping
 //    public List<DadosListagemMedico> listar()
@@ -55,4 +55,17 @@ public class MedicoController {
         medico.atualizarInformacoes(dados);
 
     }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
+    }
+//    Exclusao tradicional - Deleta no banco de dados:
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public void excluir(@PathVariable Long id)
+//    {
+//        repository.deleteById(id);
+//    }
 }
